@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 # Create your models here.
 class Category(models.Model):
@@ -12,11 +13,14 @@ class Category(models.Model):
 
     def __str__(self): 
         return self.name
+    
+    def get_absolute_url(self):
+        return reverse('shop:product_list_by_category',args=[self.slug]) #url,args
 
 class Product(models.Model):
     category = models.ForeignKey(Category, related_name='products', on_delete=models.CASCADE)
     name = models.CharField(max_length=200, db_index=True)
-    slug = models.SlugField(max_length=200, db_index=True)
+    slug = models.SlugField(max_length=200, db_index=True) #slug is used to build SEO-friendly URLs
     image = models.ImageField(upload_to='products/', blank=True)
     description = models.TextField(blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2) 
@@ -30,3 +34,6 @@ class Product(models.Model):
     
     def __str__(self):
         return self.name
+    
+    def get_absolute_url(self):
+        return reverse('shop:product_detail',args=[self.id,self.slug])
