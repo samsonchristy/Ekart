@@ -128,3 +128,15 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 # Cart settings
 CART_SESSION_ID = 'cart'# This is the key that we are going to use to store the cart in the user session.
+
+#telling Django to write emails to the console
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# Braintree settings
+BRAINTREE_MERCHANT_ID = 'fdgwdm9jt24fmfd2' # Merchant ID
+BRAINTREE_PUBLIC_KEY = '7c7mhfdh4t2hm24t' # Public Key
+BRAINTREE_PRIVATE_KEY = 'cadb3e47b41327683b903fcf7777ea8b' # Private key
+
+from braintree import Configuration, Environment
+
+Configuration.configure(Environment.Sandbox,BRAINTREE_MERCHANT_ID,BRAINTREE_PUBLIC_KEY,BRAINTREE_PRIVATE_KEY)
