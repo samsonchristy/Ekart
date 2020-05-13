@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'shop.apps.ShopConfig',
     'cart.apps.CartConfig',
     'orders.apps.OrdersConfig',
+    'payment.apps.PaymentConfig',
 ]
 
 MIDDLEWARE = [
@@ -139,4 +140,4 @@ BRAINTREE_PRIVATE_KEY = 'cadb3e47b41327683b903fcf7777ea8b' # Private key
 
 from braintree import Configuration, Environment
 
-Configuration.configure(Environment.Sandbox,BRAINTREE_MERCHANT_ID,BRAINTREE_PUBLIC_KEY,BRAINTREE_PRIVATE_KEY)
+Configuration.configure(Environment.Sandbox,BRAINTREE_MERCHANT_ID,BRAINTREE_PUBLIC_KEY,BRAINTREE_PRIVATE_KEY)#Environment.Production for production environment
