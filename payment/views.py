@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 import braintree
 from orders.models import Order
+from django.core.mail import EmailMessage
+from orders.utils import render_to_pdf
 
 # Create your views here.
 
@@ -26,6 +28,16 @@ def payment_process(request):
             # store the unique transaction id
             order.braintree_id = result.transaction.id
             order.save()
+            # create invoice e-mail
+            subject = 'My shop - Invoice no. {}'.format(order.id)
+            message = 'please find the attached invoice for your recent purchase'
+            email = EmailMessage(subject, message, 'admin@Ekart.com', [order.email])#EmailMessage vs send_mail difference
+            # generate PDF
+            pdf = render_to_pdf('orders/order/pdf.html', {'order':order}, False)
+            # attach PDF file
+            email.attach('order_{}.pdf'.format(order.id,),pdf,'application/pdf')
+            # send e-mail
+            email.send()                
             return redirect('payment:done')
         else:
             return redirect('payment:canceled')
