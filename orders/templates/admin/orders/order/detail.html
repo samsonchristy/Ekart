@@ -44,7 +44,7 @@
     <td>{{ order.address }}, {{ order.postal_code }} {{ order.city }}</td>
   </tr>
   <tr>
-    <th>Total amount</th>
+    <th>Total amount{% if order.coupon %} after discount{% endif%}</th>
     <td>${{ order.get_total_cost }}</td>
   </tr>
   <tr>
@@ -75,7 +75,7 @@
           </tr>
         {% endfor %}
         <tr class="total">
-          <td colspan="3">Total</td>
+          <td colspan="3">Total {% if order.coupon %}"{{order.discount}}" %off applied for coupon: "{{order.coupon}}"{%endif%}</td>
           <td class="num">${{ order.get_total_cost }}</td>
         </tr>
       </tbody>

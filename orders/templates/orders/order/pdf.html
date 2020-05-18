@@ -114,7 +114,7 @@
         </tbody> 
     </table> 
     <div>
-        <div><h3> Total Cost: ${{ order.get_total_cost }}</h3></div> 
+        <div><h3> Total Cost: ${{ order.get_total_cost }} {%if order.coupon %} (after {{order.discount}}% discount) {%endif%}</h3></div> 
     </div>
     <span class="{% if order.paid %}paid{% else %}pending{% endif %}"> 
         {% if order.paid %}Paid{% else %}Pending payment{% endif %} 
