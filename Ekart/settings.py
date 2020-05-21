@@ -142,5 +142,9 @@ BRAINTREE_PUBLIC_KEY = '7c7mhfdh4t2hm24t' # Public Key
 BRAINTREE_PRIVATE_KEY = 'cadb3e47b41327683b903fcf7777ea8b' # Private key
 
 from braintree import Configuration, Environment
+#Environment.Production for production environment
+Configuration.configure(Environment.Sandbox,BRAINTREE_MERCHANT_ID,BRAINTREE_PUBLIC_KEY,BRAINTREE_PRIVATE_KEY)
 
-Configuration.configure(Environment.Sandbox,BRAINTREE_MERCHANT_ID,BRAINTREE_PUBLIC_KEY,BRAINTREE_PRIVATE_KEY)#Environment.Production for production environment
+REDIS_HOST = 'localhost'
+REDIS_PORT = 6379
+REDIS_DB = 1
